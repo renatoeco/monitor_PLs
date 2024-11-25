@@ -7,6 +7,8 @@ from selenium import webdriver
 import time
 
 
+# python 3.12
+
 # comparar o número da proposição para achar os erros PL/Link
 
 # def raspar_camara():
