@@ -58,6 +58,7 @@ navegador = webdriver.Chrome(service=servico, options=opcoes)
 # criar um dataframe a partir do csv de links
 df_pls = pd.read_csv('dados/lista_pls.csv', sep=',')
 
+st.write('Meu dataframe')
 st.write(df_pls)
 
     
