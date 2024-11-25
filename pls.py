@@ -1,9 +1,10 @@
 import pandas as pd
 import streamlit as st
-from selenium.webdriver.chrome.service import Service as ChromiumService
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager  # Automatiza a configuração do ChromeDriver
 import time
 
 
@@ -42,30 +43,21 @@ import time
 
 
 
-# Configuração do Chromium
+# Configuração do Chrome
 opcoes = Options()
-opcoes.binary_location = '/usr/bin/chromium-browser'
-opcoes.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
-opcoes.add_argument('--start-maximized')  # Adiciona a opção para maximizar a janela
+opcoes.add_argument('--start-maximized')
 
-# Configuração do serviço do Chromium WebDriver
-servico = ChromiumService('/usr/lib/chromium-browser/chromedriver')
-navegador = webdriver.Chrome(service=servico, options=opcoes)
+# Inicializa o navegador com o ChromeDriver gerenciado automaticamente
+navegador = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opcoes)
 
-
-# ///////////////////////////////////////////////////
-
-
-
+# Carregar o CSV com os dados
 # criar um dataframe a partir do csv de links
-df_pls = pd.read_csv('dados/lista_pls.csv', sep=',')
+df_pls = pd.read_csv(r'C:\Users\Bernardo\Documents\ISPN\Projeto Adriana\dados\Monitoramento PLs - CD e SF [Todas as proposições] - Proposições.csv', sep=',')
 
 st.write('Meu dataframe')
 st.write(df_pls)
 
-    
-
-
+# ///////////////////////////////////////////////////
 
 try:
 
