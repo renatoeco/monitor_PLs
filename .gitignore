@@ -1,3 +1,5 @@
-dados/
+dados
 env_pls
-monitor_PLs\requirements.txt
+env_advocacy
+backup 241129.py
+secrets.toml
