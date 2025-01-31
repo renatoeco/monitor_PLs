@@ -494,7 +494,7 @@ else:
     raise FileNotFoundError("O segredo do MongoDB não foi encontrado!")
 
 # Conecta ao MongoDB usando o cliente
-cliente = (mongo_uri)
+cliente = MongoClient(mongo_uri)
     #st.secrets["mongo_atlas"]["string_conexao"]
     # 'mongodb://localhost:27017'
 
