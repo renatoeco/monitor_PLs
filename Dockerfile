@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 # Configura variáveis para evitar interatividade no apt-get
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/Sao_Paulo  # Ajuste conforme necessário
+ENV TZ=America/Sao_Paulo
 
 # Atualiza o sistema e instala as dependências do Chrome e do WebDriver
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
