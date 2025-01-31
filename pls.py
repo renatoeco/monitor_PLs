@@ -484,17 +484,6 @@ def exibir_alteracoes():
 # CONEXÃO MONGO DB
 # ###################################################################################################
 
-# Caminho onde o Secret será montado pelo Docker
-# SECRET_PATH = "/run/secrets/mongo_atlas_senha"
-
-# # Caminho onde o Secret será montado pelo Docker
-# SECRET_PATH = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
-
-# if os.path.exists(SECRET_PATH):
-#     with open(SECRET_PATH, "r") as secret_file:
-#         mongo_uri = secret_file.read().strip()
-# else:
-#     raise FileNotFoundError("O segredo do MongoDB não foi encontrado!")
 
 # String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
 # Exemplo de comando de run do container:
