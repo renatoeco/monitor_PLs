@@ -2,7 +2,7 @@
 
 FROM python:3.12-slim
 
-WORKDIR /Docker_Testes
+WORKDIR /app
 
 # Instala dependências do sistema
 RUN apt-get update && apt-get install -y \
