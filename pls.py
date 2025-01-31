@@ -485,7 +485,10 @@ def exibir_alteracoes():
 # ###################################################################################################
 
 # Caminho onde o Secret será montado pelo Docker
-SECRET_PATH = "/run/secrets/mongo_atlas_senha"
+# SECRET_PATH = "/run/secrets/mongo_atlas_senha"
+
+# Caminho onde o Secret será montado pelo Docker
+SECRET_PATH = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
 
 if os.path.exists(SECRET_PATH):
     with open(SECRET_PATH, "r") as secret_file:
