@@ -12,10 +12,15 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Instala dependências do Chrome e WebDriver
-RUN apt-get update && apt-get install -y \
+# Configura variáveis para evitar interatividade no apt-get
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/Sao_Paulo  # Ajuste conforme necessário
+
+# Atualiza o sistema e instala as dependências do Chrome e do WebDriver
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     wget unzip curl gnupg libgconf-2-4 libnss3 libxss1 libappindicator1 libindicator7 \
-    fonts-liberation xdg-utils libgbm1 libasound2 libu2f-udev
+    fonts-liberation xdg-utils libgbm1 libasound2 libu2f-udev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Baixa e instala o Google Chrome
 RUN wget -qO- https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
