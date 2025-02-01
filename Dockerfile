@@ -5,29 +5,29 @@ FROM selenium/standalone-chrome:latest
 
 WORKDIR /app
 
-# Instala dependências do sistema
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    curl \
-    software-properties-common \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# # Instala dependências do sistema
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     curl \
+#     software-properties-common \
+#     git \
+#     && rm -rf /var/lib/apt/lists/*
 
 
-# Instala as dependências do Chrome
-RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
-    libxext6 \
-    libxrender1 \
-    xvfb \
-    xauth \
-    wget \
-    unzip
+# # Instala as dependências do Chrome
+# RUN apt-get update && apt-get install -y \
+#     libgl1 \
+#     libglib2.0-0 \
+#     libxext6 \
+#     libxrender1 \
+#     xvfb \
+#     xauth \
+#     wget \
+#     unzip
 
-# Instala o Chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb; apt-get install -f -y
+# # Instala o Chrome
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+#     dpkg -i google-chrome-stable_current_amd64.deb; apt-get install -f -y
 
 
 # Remove a pasta antiga e clona o repositório
