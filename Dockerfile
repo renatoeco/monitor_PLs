@@ -5,13 +5,13 @@ FROM selenium/standalone-chrome:latest
 
 WORKDIR /app
 
-# # Instala dependências do sistema
-# RUN apt-get update && apt-get install -y \
-#     build-essential \
-#     curl \
-#     software-properties-common \
-#     git \
-#     && rm -rf /var/lib/apt/lists/*
+# Instala dependências do sistema
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 
 # # Instala as dependências do Chrome
