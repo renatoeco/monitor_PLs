@@ -9,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager  # Automatiza a configu
 import time
 from datetime import datetime, timedelta
 import os
+import tempfile
 
 
 # ###################################################################################################
@@ -35,11 +36,31 @@ colunas = ['Tema', 'Sub-Tema', 'Proposições', 'Ementa', 'Casa', 'Autor', 'UF',
         'Apresentação', 'Situação', 'Data da Última Ação Legislativa', 'Última Ação Legislativa', 'Link']
 df_final = pd.DataFrame(columns=colunas)  # Cria o DataFrame com as colunas definidas
 
+
+
+
 # Configuração do Selenium
+
+# Criar um diretório temporário único para o perfil do Chrome
+chrome_user_data_dir = tempfile.mkdtemp()
+
 opcoes = Options()
-# opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
-opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
-opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
+opcoes.add_argument("--headless")  # Sem interface gráfica
+opcoes.add_argument("--no-sandbox")  # Necessário para rodar no Docker
+opcoes.add_argument("--disable-dev-shm-usage")  # Evita consumo excessivo de memória
+opcoes.add_argument("--disable-gpu")
+opcoes.add_argument("--remote-debugging-port=9222")
+opcoes.add_argument(f"--user-data-dir={chrome_user_data_dir}")  # Diretório temporário único
+
+
+
+
+# opcoes = Options()
+# # opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
+# opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
+# opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
+
+
 
 
 
