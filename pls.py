@@ -37,14 +37,7 @@ df_final = pd.DataFrame(columns=colunas)  # Cria o DataFrame com as colunas defi
 
 # Configuração do Selenium
 opcoes = Options()
-# # opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
-# opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
-# opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
-
-
-
-
-# teste ????????????????
+# opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
 opcoes.add_argument("--headless")  # Modo headless
 opcoes.add_argument("--no-sandbox")
 opcoes.add_argument("--disable-dev-shm-usage")  # Evita problemas de memória
@@ -71,11 +64,6 @@ opcoes.add_argument("--safebrowsing-disable-auto-update")
 opcoes.add_argument("--enable-automation")
 opcoes.add_argument("--password-store=basic")
 opcoes.add_argument("--use-mock-keychain")
-
-
-
-
-
 
 
 
@@ -522,9 +510,10 @@ def exibir_alteracoes():
 # ###################################################################################################
 
 # # CONEXÃO NO DOCKER --------------------------------------------------------------------------------------------------------------
+
 # String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
-# Exemplo de comando de run do container:
-# docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
+# Exemplo: docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
+
 mongo_uri = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
 
 if not mongo_uri:
@@ -548,6 +537,9 @@ contador = colecao_2.find_one({"_id": "contador_cliques"})
 if contador is None:
     # Caso não exista, cria um com valor inicial 0
     colecao_2.insert_one({"_id": "contador_cliques", "cliques": 0})
+
+
+
 
 # ###################################################################################################
 # INTERFACE PRINCIPAL
@@ -900,9 +892,6 @@ with aba2:
     st.write("")
 
     resultado_comparacao = st.container()
-
-
-
 
 
 
