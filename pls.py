@@ -35,10 +35,11 @@ colunas = ['Tema', 'Sub-Tema', 'Proposições', 'Ementa', 'Casa', 'Autor', 'UF',
         'Apresentação', 'Situação', 'Data da Última Ação Legislativa', 'Última Ação Legislativa', 'Link']
 df_final = pd.DataFrame(columns=colunas)  # Cria o DataFrame com as colunas definidas
 
-# Configuração das opções do navegador para a automação com o Selenium (sem abrir o navegador visualmente)
+# Configuração do Selenium
 opcoes = Options()
 # opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
 opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
+opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
 
 
 

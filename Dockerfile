@@ -28,7 +28,8 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     dpkg -i google-chrome-stable_current_amd64.deb; apt-get install -f -y
 
-# Remove a pata antiga e clona o repositório
+
+# Remove a pasta antiga e clona o repositório
 RUN rm -rf * && git clone https://github.com/renatoeco/monitor_PLs.git .
 
 # Instala as dependências do Python
