@@ -512,20 +512,20 @@ def exibir_alteracoes():
 
 # # CONEXÃO NO DOCKER --------------------------------------------------------------------------------------------------------------
 
-# # String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
-# # Exemplo: docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
+# String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
+# Exemplo: docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
 
-# mongo_uri = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
+mongo_uri = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
 
-# if not mongo_uri:
-#     raise ValueError("O segredo do MongoDB não foi encontrado!")
+if not mongo_uri:
+    raise ValueError("O segredo do MongoDB não foi encontrado!")
 
-# # Conecta ao MongoDB usando o cliente
-# cliente = MongoClient(mongo_uri)
+# Conecta ao MongoDB usando o cliente
+cliente = MongoClient(mongo_uri)
   
 
 # CONEXÃO LOCAL -------------------------------------------------------------------------------------------------------------------
-cliente = MongoClient(st.secrets["mongo_atlas"]["string_conexao"])
+# cliente = MongoClient(st.secrets["mongo_atlas"]["string_conexao"])
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
