@@ -31,7 +31,7 @@ WORKDIR /app
 
 
 # Remove a pasta antiga e clona o repositório
-RUN rm -rf * && git clone https://github.com/renatoeco/monitor_PLs.git .
+RUN git clone https://github.com/renatoeco/monitor_PLs.git .
 
 # Instala as dependências do Python
 RUN pip3 install -r requirements.txt
