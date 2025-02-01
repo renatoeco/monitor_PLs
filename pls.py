@@ -16,11 +16,8 @@ import os
 # ###################################################################################################
 
 # Configurações do Streamlit
-st.set_page_config(layout="wide")
-# Set nome do app
-st.set_page_config(page_title="Harpia - ISPN")
-
-
+st.set_page_config(layout="wide",
+                   page_title="Harpia - ISPN")
 
 # Adiciona um estilo CSS para mudar a cor da barra lateral (sidebar) no Streamlit
 st.markdown(
