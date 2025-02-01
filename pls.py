@@ -15,8 +15,12 @@ import os
 # CONFIGURAÇÕES INICIAIS
 # ###################################################################################################
 
-# Configurações do Streamlit: Define o layout da página como 'wide', ou seja, mais espaçoso
+# Configurações do Streamlit
 st.set_page_config(layout="wide")
+# Set nome do app
+st.set_page_config(page_title="Harpia - ISPN")
+
+
 
 # Adiciona um estilo CSS para mudar a cor da barra lateral (sidebar) no Streamlit
 st.markdown(
@@ -451,7 +455,7 @@ def verificar_atualizacoes(df, colecao):
 
     # Exibe um aviso se nenhuma alteração foi detectada
     if nenhuma_alteracao:
-        resultado_comparacao.warning('Nenhuma atualização encontrada.')
+        resultado_comparacao.warning('Nenhuma proposição teve andamento desde a ultima verificação.')
 
     # Salva as alterações detectadas no estado da sessão
     st.session_state["alteracoes"] = alteracoes_detectadas
@@ -461,6 +465,8 @@ def verificar_atualizacoes(df, colecao):
 def exibir_alteracoes():
     # Verifica se há alterações para exibir
     if "alteracoes" in st.session_state:
+
+        st.subheader(f"{len(st.session_state['alteracoes'])} atualizações desde a última verificação.")
 
         # Itera sobre as alterações detectadas e exibe os detalhes
         for alteracao in st.session_state["alteracoes"]:
