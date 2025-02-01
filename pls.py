@@ -53,6 +53,7 @@ opcoes.add_argument("--remote-debugging-port=9222")
 opcoes.add_argument("--icognito")
 # opcoes.add_argument(f"--user-data-dir={user_data_dir}")  # Diretório temporário único
 
+os.system("pkill -f chrome || true")
 
 
 
