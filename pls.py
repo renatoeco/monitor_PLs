@@ -463,8 +463,6 @@ def exibir_alteracoes():
     # Verifica se há alterações para exibir
     if "alteracoes" in st.session_state:
 
-        st.subheader(f"{len(st.session_state['alteracoes'])} atualizações desde a última verificação.")
-
         # Itera sobre as alterações detectadas e exibe os detalhes
         for alteracao in st.session_state["alteracoes"]:
             # Exibe as informações gerais sobre a alteração
@@ -501,7 +499,7 @@ def exibir_alteracoes():
 
             # Adiciona um divisor entre as alterações
             resultado_comparacao.divider()
-
+            
     else:
         # Exibe uma mensagem caso nenhuma alteração tenha sido detectada
         resultado_comparacao.write("Nenhuma alteração detectada.")
@@ -514,20 +512,20 @@ def exibir_alteracoes():
 
 # # CONEXÃO NO DOCKER --------------------------------------------------------------------------------------------------------------
 
-# String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
-# Exemplo: docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
+# # String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
+# # Exemplo: docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
 
-mongo_uri = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
+# mongo_uri = os.getenv("MONGO_ATLAS_STRING_CONEXAO")
 
-if not mongo_uri:
-    raise ValueError("O segredo do MongoDB não foi encontrado!")
+# if not mongo_uri:
+#     raise ValueError("O segredo do MongoDB não foi encontrado!")
 
-# Conecta ao MongoDB usando o cliente
-cliente = MongoClient(mongo_uri)
+# # Conecta ao MongoDB usando o cliente
+# cliente = MongoClient(mongo_uri)
   
 
 # CONEXÃO LOCAL -------------------------------------------------------------------------------------------------------------------
-# cliente = MongoClient(st.secrets["mongo_atlas"]["string_conexao"])
+cliente = MongoClient(st.secrets["mongo_atlas"]["string_conexao"])
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -878,6 +876,16 @@ with aba2:
                 # Chama a função para verificar as atualizações
                 verificar_atualizacoes(df_final, colecao)
                 # Exibe as alterações persistidas após a verificação
+
+                # Mostra quantas atualizações foram encontradas
+                if len(st.session_state["alteracoes"]) > 1:
+                    resultado_comparacao.markdown(f"<h3 style='color: #999'>{len(st.session_state['alteracoes'])} atualizações desde a última verificação.</h3>", unsafe_allow_html=True)
+
+                    # resultado_comparacao.subheader(f"{len(st.session_state['alteracoes'])} atualizações desde a última verificação.")
+                else:
+                    resultado_comparacao.markdown(f"<h3 style='color: #999'>{len(st.session_state['alteracoes'])} atualização desde a última verificação.</h3>", unsafe_allow_html=True)
+                    # subheader(f"{len(st.session_state['alteracoes'])} atualização desde a última verificação.")
+
                 exibir_alteracoes()
                 # Incrementa o contador diretamente no MongoDB
                 colecao_2.update_one(
