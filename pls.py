@@ -37,9 +37,45 @@ df_final = pd.DataFrame(columns=colunas)  # Cria o DataFrame com as colunas defi
 
 # Configuração do Selenium
 opcoes = Options()
-# opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
-opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
-opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
+# # opcoes.add_argument('--start-maximized')  # Descomentando essa linha, o navegador abriria maximizado
+# opcoes.add_argument('--headless')  # Roda o navegador em modo headless (sem interface gráfica)
+# opcoes.add_argument('--no-sandbox')  # Necessário para rodar no Docker
+
+
+
+
+# teste ????????????????
+opcoes.add_argument("--headless")  # Modo headless
+opcoes.add_argument("--no-sandbox")
+opcoes.add_argument("--disable-dev-shm-usage")  # Evita problemas de memória
+opcoes.add_argument("--disable-gpu")  # Desabilita a GPU
+opcoes.add_argument("--disable-software-rasterizer")  # Desabilita o rasterizador de software
+opcoes.add_argument("--disable-extensions")  # Desabilita extensões
+opcoes.add_argument("--disable-background-networking")  # Desabilita networking em segundo plano
+opcoes.add_argument("--disable-background-timer-throttling")
+opcoes.add_argument("--disable-backgrounding-occluded-windows")
+opcoes.add_argument("--disable-breakpad")
+opcoes.add_argument("--disable-component-update")
+opcoes.add_argument("--disable-default-apps")
+opcoes.add_argument("--disable-domain-reliability")
+opcoes.add_argument("--disable-features=AudioServiceOutOfProcess")
+opcoes.add_argument("--disable-hang-monitor")
+opcoes.add_argument("--disable-ipc-flooding-protection")
+opcoes.add_argument("--disable-popup-blocking")
+opcoes.add_argument("--disable-prompt-on-repost")
+opcoes.add_argument("--disable-renderer-backgrounding")
+opcoes.add_argument("--disable-sync")
+opcoes.add_argument("--force-color-profile=srgb")
+opcoes.add_argument("--metrics-recording-only")
+opcoes.add_argument("--safebrowsing-disable-auto-update")
+opcoes.add_argument("--enable-automation")
+opcoes.add_argument("--password-store=basic")
+opcoes.add_argument("--use-mock-keychain")
+
+
+
+
+
 
 
 
@@ -485,7 +521,7 @@ def exibir_alteracoes():
 # CONEXÃO MONGO DB
 # ###################################################################################################
 
-
+# # CONEXÃO NO DOCKER --------------------------------------------------------------------------------------------------------------
 # String de conexão do mongo atlas está na variável de ambiente do container. Precisa ser declarada no comando de run do container.
 # Exemplo de comando de run do container:
 # docker run -e MONGO_ATLAS_STRING_CONEXAO="<minha string>" --name <nome do container> -p 8501:8501 <nome da imagem>
@@ -496,8 +532,12 @@ if not mongo_uri:
 
 # Conecta ao MongoDB usando o cliente
 cliente = MongoClient(mongo_uri)
-    #st.secrets["mongo_atlas"]["string_conexao"]
-    # 'mongodb://localhost:27017'
+  
+
+# CONEXÃO LOCAL -------------------------------------------------------------------------------------------------------------------
+# cliente = MongoClient(st.secrets["mongo_atlas"]["string_conexao"])
+
+# ---------------------------------------------------------------------------------------------------------------------------------
 
 db = cliente['db_pls']
 colecao = db['PLS']
@@ -528,7 +568,7 @@ st.logo("https://ispn.org.br/site/wp-content/uploads/2021/04/logo_ISPN_2021.png"
 
 
 # Criando a interface de gerenciamento de PLs com uma caixa de diálogo
-@st.dialog("Gerenciar PLs", width="large")
+@st.dialog("Gerenciar PLs")
 def dial_gerenciar_pls():
 
     # Cria as abas: Adicionar, Editar e Excluir PLs
@@ -834,6 +874,9 @@ with aba2:
                     else:
                         st.warning(f"URL desconhecida: {link}")
                         continue
+
+            except Exception as e:
+                st.error(f"Não foi possível acessar a página {link}")
 
             finally:
                 navegador.quit()
